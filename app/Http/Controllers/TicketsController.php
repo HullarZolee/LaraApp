@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Http\Requests\TicketFormRequest;
+use App\Ticket;
 
-class PostsController extends Controller
+class TicketsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +15,11 @@ class PostsController extends Controller
      */
     public function index()
     {
-        // $posts = Post::orderBy('created_at', 'desc')->paginate(5);
-        // return view('posts.index')->with('posts', $posts);
-        $posts = Post::all();
-        return response()->json($posts);
-        
-        
+        $tickets = Ticket::all();
+        return view('tickets.index', compact('tickets'));
+
+        // return view('tickets.index')->with('tickets', $tickets);
+        // return view('tickets.index', ['tickets'=> $tickets]);
     }
 
     /**
@@ -29,8 +29,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('tickets.create');
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -38,20 +39,17 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TicketFormRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required|unique:posts,title',
-            'body' => 'required'
+        $slug = uniqid();
+        $ticket = new Ticket(array(
+        'title' => $request->get('title'),
+        'content' => $request->get('content'),
+        'slug' => $slug
+    ));
 
-        ]);
-
-        $post = new Post;
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-
-        $post->save();
-        return redirect('/posts')->with('succes', 'Post Created');
+        $ticket->save();
+        return redirect('/contact')->with('status', 'Your ticket has been created! Its unique id is: '.$slug);
     }
 
     /**
@@ -62,10 +60,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
-        // return view('posts.show')->with('post', $post);
-
-        return response()->json($post);
+        $ticket = Ticket::whereSlug($id)->firstOrFail();
+        return view('tickets.show', compact('ticket'));
     }
 
     /**

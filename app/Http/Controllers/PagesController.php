@@ -36,4 +36,5 @@ class PagesController extends Controller
     {
         return view('posts.create');
     }
+
 }

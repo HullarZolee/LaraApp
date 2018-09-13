@@ -3,5 +3,11 @@
 
 @section('content')
         <h1>about</h1>
+
+        <div id="mosh">
+
+                
+        </div>
+
 @endsection
 

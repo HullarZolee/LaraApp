@@ -16,4 +16,5 @@ require('./bootstrap');
 // require('./components/Example');
 // require('./components/Example.1');
 require('./index');
+require('./Mosh.React/index');
 
