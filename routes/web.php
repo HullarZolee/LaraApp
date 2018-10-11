@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 // Route::get('/users/{id}', function ($id) {
 //      return 'Hello ' . $id;
@@ -19,16 +19,40 @@
 //     return view('welcome');
 // });
 
+// posts
 Route::get('/', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 Route::get('/service', 'PagesController@service');
+// Route::get('/posts', 'PostsController@index');
+// Route::get('/posts/create', 'PostsController@create');
+// Route::get('/posts/edit/{id}', 'PostsController@edit');
 
+Route::resource('posts', 'PostsController');
+// posts
 
-Route::get('/posts','PagesController@posts_index');
-Route::get('/posts/create','PagesController@create_index');
+//Route::resource('posts', 'PostsController');
 
+// tickets
 Route::get('/contact', 'TicketsController@create');
 Route::post('/contact', 'TicketsController@store');
-
 Route::get('/tickets', 'TicketsController@index');
 Route::get('/ticket/{slug?}', 'TicketsController@show');
+// edit a ticket
+Route::get('/ticket/{slug?}/editor', 'TicketsController@editor')->name('tickets.editor');
+// update ticket
+Route::post('/ticket/{slug?}/editor', 'TicketsController@update');
+Route::post('/ticket/{slug?}/delete', 'TicketsController@destroy');
+
+// commnents
+Route::post('/comment', 'CommentsController@newComment');
+Route::post('/posts', 'CommentsController@storeToPost');
+
+// Route::group(['domain' => 'api.' . URL::to('/')], function() {
+//      Route::get('/', function() {
+
+//     });
+// });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -10,5 +10,4 @@
 </ul>
 @endif
 
-<div id="example"></div>
 @endsection

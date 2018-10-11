@@ -26,7 +26,7 @@ export default class Posts extends Component {
     }
     componentDidMount() {
         axios
-            .get("/api/posts")
+            .get("/web/posts/")
             .then(response => {
                 
                 this.setState({
@@ -41,16 +41,21 @@ export default class Posts extends Component {
     render() {
 
         const listItems = this.state.blogs.map(blog => (
-            <li key={blog.id}>
+            <div className='card bg-dark mb-4'>
+            <li className='card-body' key={blog.id}>
              <Link to={"/post/" + blog.id}> {blog.title} </Link>
+             
             </li>
+            <a className='btn bg-info text-white' href={"/posts/edit/" + blog.id}><h4>Edit</h4></a>
+            <hr></hr>
+            </div>
         ));
 
         //  console.log(listItems);
 
         return (
             <div className="container">
-                <h1>Post comp </h1>
+                
 
                 
                {listItems}

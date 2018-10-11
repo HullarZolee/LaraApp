@@ -14,7 +14,7 @@ export default class Index extends Component {
             
                 <div>
                 <Link to="/">Home</Link>
-                <Link to="/posts">Home</Link>
+                <Link className='mb-4' to="/posts">Blog</Link>
                 
 
                 <Route path="/" exact component={Example}/>

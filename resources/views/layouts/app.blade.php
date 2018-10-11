@@ -1,44 +1,33 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link href="{{URL::to('css/app.css') }}" rel="stylesheet" type="text/css" >
-    </head>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <body>
-        @include('inc.navbar')
-        <div class="container">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
-        
-        @yield('content')
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+<body>
+    @include('inc.navbar')
+    <div class="container-fluid mt-5" id="app">
+
+
+        <main class="py-4">
+            @yield('content')
+        </main>
     </div>
-
-        <script src="/js/app.js"></script>
-    </body>
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-    {{-- Text Editor
-    A <script> betöltése nem sikerült --}}
-
-    {{-- <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
-    <script src= {{ base_path('vendor\unisharp\laravel-ckeditor\ckeditor.js') }}></script>
-    <script>
-        CKEDITOR.replace( 'article-ckeditor' );
-    </script> --}}

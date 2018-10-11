@@ -12,11 +12,11 @@ export default class BlogPost extends Component {
     }
 
     componentDidMount() {
-        axios
-            .get("/api/posts")
-            .then(response => { 
+        axios.get("/api/posts").then(response => {
+
                 this.setState({ post: response.data[0] });
-                }).catch(error => console.log(error));
+
+            }).catch(error => console.log(error));
     }
 
     render() {
@@ -26,6 +26,7 @@ export default class BlogPost extends Component {
 
             <h1>{this.state.post.title}</h1>
             <p> {this.state.post.body} </p>
+            
         
         </div>
         );

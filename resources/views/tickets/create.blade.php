@@ -8,9 +8,9 @@
     </div>
 @endif
 
-<div class="container col-md-8 col-md-offset-2">
+<div class="container col-md-10 col-md-offset-2">
     <div class="well well bs-component">
-        <form class="form-horizontal" method="post">
+        <form  method="post">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <fieldset>
                 <legend>Submit a new ticket</legend>
