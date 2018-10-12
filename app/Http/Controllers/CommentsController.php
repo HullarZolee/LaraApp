@@ -21,17 +21,17 @@ class CommentsController extends Controller
         return redirect()->back()->with('status', 'Your comment has been created!');
     }
 
-    public function storeToPost(CommentFormRequest $request)
-    {
-        $comment = new Comment(array(
-            'post_id' => $request->get('post_id'),
-            'content' => $request->get('content'),
-            'user_id' => $request->get('user_id')
-        )); 
+    // public function storeToPost(CommentFormRequest $request)
+    // {
+    //     $comment = new Comment(array(
+    //         'post_id' => $request->get('post_id'),
+    //         'content' => $request->get('content'),
+    //         'user_id' => $request->get('user_id')
+    //     )); 
 
-        $comment->save();
+    //     $comment->save();
 
-        return redirect()->back()->with('status', 'Your comment has been created!');
-    }
+    //     return redirect()->back()->with('status', 'Your comment has been created!');
+    // }
     
 }

@@ -2,14 +2,20 @@
 
 @section('content')
 
-@if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-@endif
 
-<div class="container col-md-10 col-md-offset-2">
-    <div class="well well bs-component">
+
+<div class="container mt-5">
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+        @foreach ($errors->all() as $error)
+        <p class="alert alert-danger">{{ $error }}</p>
+    @endforeach
+
+    <div class="card">
+        <div class="card-body">
         <form  method="post">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <fieldset>
@@ -27,20 +33,18 @@
                         <span class="help-block">Feel free to ask us any question.</span>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button class="btn btn-default">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+                <div class="card-footer bg-primary">
+                    <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
                     </div>
                 </div>
-            </fieldset>
-        </form>
+                </fieldset>
+            </form>
+        
     </div>
 </div>
-
-@foreach ($errors->all() as $error)
-    <p class="alert alert-danger">{{ $error }}</p>
-@endforeach
   
 @endsection

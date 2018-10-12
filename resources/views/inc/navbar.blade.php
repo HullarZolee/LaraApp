@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top ">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
@@ -7,13 +7,7 @@
             <span class="navbar-toggler-icon">
             </span>
         </button>
-        @guest
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <bold>
-                You are a guest
-            </bold>
-        </div>
-        @else
+        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
@@ -21,63 +15,49 @@
             {{-- custume links --}}
             <ul class="nav navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
-                        Home
-                        <span class="sr-only">
-                            (current)
-                        </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">
-                        About
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/service">
-                        Service
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/posts">
+                    <h4><a class="nav-link badge badge-primary text-white mr-2 pb-3 pt-3" href="/posts">
                         Blog
-                    </a>
+                    </a></h4>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">
+                        <h4><a class="nav-link badge badge-primary text-white mr-2 pb-3 pt-3" href="/contact">
                         Contact Us
-                    </a>
+                    </a> </h4>
                 </li>
+                @auth
                 <li class="nav-item">
-                    <a class="nav-link" href="/tickets">
+                        <h4><a class="nav-link badge badge-primary text-white mr-2 pb-3 pt-3" href="/tickets">
                         Tickets
-                    </a>
+                    </a> </h4>
                 </li>
+                @endauth
             </ul>
-            @endguest
+            
+            
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">
+                    <h4><a class="nav-link badge badge-success text-white p-2 mr-2 btn btn-lg" href="{{ route('login') }}">
                         {{ __('Login') }}
-                    </a>
+                    </a></h4>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">
+                    <h4><a class="nav-link badge badge-primary text-white p-2 mr-2 btn btn-lg" href="{{ route('register') }}">
                         {{ __('Register') }}
-                    </a>
+                    </a></h4>
                 </li>
                 @else
                 <li class="nav-item ">
-                    <a class="nav-link btn btn-outline-success font-weight-bold text-light" href="/posts/create">
+                    <a class="btn btn-outline-light font-weight-bold mr-4" href="/posts/create">
                         Create post
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a aria-expanded="false" aria-haspopup="true" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdown" role="button" v-pre="">
-                        {{ Auth::user()->name }}
+                    <a aria-expanded="false" aria-haspopup="true" 
+                    class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" id="navbarDropdown" role="button" v-pre="">
+                        <span class="font-weight-bold">{{ Auth::user()->name }} </span> 
                         <span class="caret">
                         </span>
                     </a>

@@ -1,49 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex justify-content-center mt-5">
-    <h1>
-        {{ $post->title }}
-    </h1>
-</div>
 
 <div class="container">
-    <div class="d-flex justify-content-between">  
-        <img style="width: 100%" src="/storage/cover_images/{{$post->cover_image}}">
-        <div style="margin: 20% 0 0 90%" class="fixed-top">
-            <div>
-            <a class="btn btn-outline-info btn-lg" href="/posts">Go Back</a>
+        <div class="d-flex justify-content-center mt-4 mb-3">
+                <h1>
+                    {{ $post->title }}
+                </h1>
             </div>
-            <div>
-            <a href="#submit-comment" class="btn btn-outline-success btn-lg mt-2" data-toggle="collapse" 
-            data-target="#submit-comment" >New Comment</a>
-            </div>
-        </div>
-    </div>
+        
+            <div>  
+                <img style="width: 100%" src="/storage/cover_images/{{$post->cover_image}}">
+            </div>        
 </div>
 
 <div class="container">
 <div class="d-flex justify-content-center mb-2 mt-5">
-    <p class="lead text-light">
+    <p class="lead text-cyan">
         {{ $post->body }}
     </p>
 </div>
 <hr class="d-flex w-75">
+
+<div class="d-flex justify-content-center mb-3">
+    <a href="#submit-comment" class="btn btn-success btn-lg mt-2" data-toggle="collapse" 
+    data-target="#submit-comment" >New Comment</a>
 </div>
+
 
 @foreach($errors->all() as $error)
                 <p class="alert alert-danger">{{ $error }}</p>
             @endforeach
     
             @if(session('status'))
-                <div class="alert alert-success">
+                <div id="status" class="alert alert-success fixed-top mt-5" data-toggle="collapse" 
+                data-target="#status">
                     {{ session('status') }}
                 </div>
 @endif
+</div>
 
 <div id="submit-comment" class="container collapse" >
 
-    {!! Form::open(['action' => 'CommentsController@storeToPost', 'method' => 'POST']) !!}
+    {!! Form::open(['action' => 'PostsController@store', 'method' => 'POST']) !!}
 
         <div class="form-group">
             {{Form::textarea('content', '', ['id' => 'article-ckeditor',
@@ -53,7 +52,7 @@
         {{Form::hidden('user_id', $post->user_id)}}
         {{Form::hidden('post_id', $post->id)}}
         
-        {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
+        {{Form::submit('Submit', ['class' => 'd-flex justify-content-center btn btn-primary'])}}
 
     {!! Form::close() !!}
 </div>
@@ -64,11 +63,11 @@
 @if(count($comments) > 0)
 @foreach ($comments as $comment)
 <div class="card mr-5 ml-5 mb-2">
-    <div class="card-body bg-dark text-light">
-        <p >{{$comment->content}}</p>
+    <div class="card-body bg-primary text-light">
+        <p>{{$comment->content}}</p>
     </div>
     <div class="card-footer">
-        <strong>Date: </strong><span>{{$comment->created_at}}</span>
+        <small><strong>Date: </strong>{{$comment->created_at}}</small>
     </div>
 </div>
 @endforeach

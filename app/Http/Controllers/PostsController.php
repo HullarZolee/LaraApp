@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Suport\Facades\Storage;
 
@@ -47,6 +48,9 @@ class PostsController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
+
+		if($request->input('title')){
+
 		$this->validate($request, [
 			'title' => 'required|unique:posts,title',
 			'body' => 'required',
@@ -71,6 +75,18 @@ class PostsController extends Controller {
 
 		$post->save();
 		return redirect('/posts')->with('succes', 'Post Created');
+		}
+
+		$comment = new Comment(array(
+			        'post_id' => $request->get('post_id'),
+			        'content' => $request->get('content'),
+			        'user_id' => $request->get('user_id')
+			    	)); 
+		
+		$comment->save();
+		return redirect()->back()->with('status', 'Your comment has been created!');
+
+
 	}
 
 	/**
@@ -163,5 +179,3 @@ class PostsController extends Controller {
 		return redirect('/posts')->with('error', 'The post ' . $id . ' has been deleted!');
 	}
 }
-
-//, 'error' => 'You cannot delete this post ):']
