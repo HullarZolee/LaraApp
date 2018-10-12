@@ -14,20 +14,23 @@
             </ul>
             {{-- custume links --}}
             <ul class="nav navbar-nav mr-auto">
+                @auth
                 <li class="nav-item">
                     <h4><a class="nav-link badge badge-primary text-white mr-2 pb-3 pt-3" href="/posts">
                         Blog
                     </a></h4>
                 </li>
-                <li class="nav-item">
-                        <h4><a class="nav-link badge badge-primary text-white mr-2 pb-3 pt-3" href="/contact">
-                        Contact Us
-                    </a> </h4>
-                </li>
-                @auth
+                
+                @if(auth()->user()->isAdmin == 1)
                 <li class="nav-item">
                         <h4><a class="nav-link badge badge-primary text-white mr-2 pb-3 pt-3" href="/tickets">
                         Tickets
+                    </a></h4>
+                </li>
+                @endif
+                <li class="nav-item">
+                        <h4><a class="nav-link badge badge-primary text-white mr-2 pb-3 pt-3" href="/contact">
+                        Contact Us
                     </a> </h4>
                 </li>
                 @endauth

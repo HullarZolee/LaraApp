@@ -44,6 +44,8 @@
 
     {{ $tickets->links() }}
 </div>
+
+
 @endsection
 
 {{-- @section('name')

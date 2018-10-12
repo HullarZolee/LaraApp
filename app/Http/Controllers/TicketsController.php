@@ -23,11 +23,13 @@ class TicketsController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
+
+		
 		$tickets = Ticket::paginate(5);
 		return view('tickets.index', compact('tickets'));
-
-		// return view('tickets.index')->with('tickets', $tickets);
-		// return view('tickets.index', ['tickets'=> $tickets]);
+		
+		//return view('tickets.index')->with('tickets', $tickets);
+		//return view('tickets.index', ['tickets'=> $tickets]);
 	}
 
 	/**
@@ -100,7 +102,7 @@ class TicketsController extends Controller {
 		$ticket->save();
 		// return redirect(action('TicketsController@editor', $ticket->slug))->with('status', 'The ticket '.$id.' has been updated!' );
 		// return  redirect()->route('TicketsController@editor', $ticket->slug)->with('status', 'The ticket '.$id.' has been updated!' );
-		// return redirect()->refresh()->with('status', 'The ticket '.$id.' has been updated!' );
+		return redirect()->refresh()->with('status', 'The ticket '.$slug.' has been updated!' );
 
 		/** force user to download file **/
 		// $filepath = public_path(). "\pdf\pdf.pdf";

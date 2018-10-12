@@ -35,11 +35,11 @@ Route::resource('posts', 'PostsController');
 // tickets
 Route::get('/contact', 'TicketsController@create');
 Route::post('/contact', 'TicketsController@store');
-Route::get('/tickets', 'TicketsController@index');
-Route::get('/ticket/{slug?}', 'TicketsController@show');
+Route::get('/tickets', 'TicketsController@index')->middleware('admin');
+Route::get('/ticket/{slug?}', 'TicketsController@show')->middleware('admin');
 Route::get('/ticket/{slug?}/editor', 'TicketsController@editor')->name('tickets.editor');
 Route::post('/ticket/{slug?}/editor', 'TicketsController@update');
-Route::post('/ticket/{slug?}/delete', 'TicketsController@destroy');
+Route::post('/ticket/{slug?}/delete', 'TicketsController@destroy')->middleware('admin');
 
 // commnents
 Route::post('/comment', 'CommentsController@newComment');
